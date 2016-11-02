@@ -1,0 +1,47 @@
+<!doctype HTML>
+<html>
+<head>
+  <script type="text/javascript">
+  var i=0;
+function Add(){
+  var me=document.getElementById('content').value;
+  console.log(me);
+  var t=document.getElementById('box');
+  console.log(t);
+  t.innerHTML += "<div id="+i+"><li><input type='checkbox' id="+i+" onclick='Strike(this)'>"+me+"<Button id="+i+" onClick='Remove("+i+")'>Remove</button></li></div>";
+i=i+1;
+}
+function Strike(i){
+
+  console.log(i);
+    console.log(i.checked);
+   if(i.checked)
+{
+   i.parentNode.style.textDecoration = "line-through";
+}
+else {
+  i.parentNode.style.textDecoration = "none";
+}
+
+}
+function Remove(i){
+var t=document.getElementById(i);
+console.log(t);
+t.parentNode.removeChild(t);
+}
+</script>
+</head>
+<center><H1>To Do App </h1></center>
+<body>
+<hr>
+<label for="Item"><input type="text" id ="content"></label>
+<button onclick="Add()"> Add to list</button>
+<hr>
+<div id="container">
+<ul id="box">
+
+
+</ul>
+</div>
+</body>
+</html>

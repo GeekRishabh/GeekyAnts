@@ -1,0 +1,38 @@
+<!Doctype HTML>
+<html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+
+   <!--- Basic Page Needs
+   ================================================== -->
+   <meta charset="utf-8">
+	<title>DOM | CSS </title>
+<script  type="text/javascript">
+function changeColor(){
+    document.getElementById("myDiv").style.backgroundColor="violet";
+}
+function changeColor1(){
+    document.getElementById("myDiv1").style.backgroundColor="black";
+}
+function changeColor2(){
+    document.getElementById("myDiv2").style.backgroundColor="white";
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+
+<div onclick="changeColor()" id="myDiv" style="background-color: blue">Box 1
+
+<div onclick="changeColor1()" id="myDiv1" style="background-color: red">Box 2
+
+<div onclick="changeColor2()" id="myDiv2" style="background-color: green">Box 3</div>
+</div>
+</div>
+
+</body>
+
+</html>

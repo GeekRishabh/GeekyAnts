@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My TodoApp js mvc</title>
+
+   </head>
+  <body>
+
+    <div>
+
+      <form id="frm">
+        <input type="text" id="inputText" />
+        <input type="submit" value="Add item" />
+      </form>
+
+      <ul id="myList">
+
+      </ul>
+
+
+    </div>
+
+    <script>
+
+      var TodoItem = function(caption){
+
+        this.caption = caption;
+        this.isCompleted = false;
+
+        this.toggle = function(){
+          this.isCompleted = !this.isCompleted;
+        }
+
+      };
+
+
+      var TodoApp = function() {
+
+        this.todoCollection = [];
+        this.userInput = '';
+
+        this.addTodo = function(caption) {
+
+          var newTodoItem = new TodoItem(caption);
+          this.todoCollection.push(newTodoItem);
+
+        }
+
+        this.toggleTodo = function(index) {
+
+          this.todoCollection[index].toggle();
+
+        }
+
+        this.removeTodo = function(index) {
+
+          this.todoCollection.splice(index, 1);
+
+        }
+
+        this.render = function() {
+
+          var ul = document.getElementById('myList');
+
+          ul.innerHTML = '';
+
+          for(var i in this.todoCollection) {
+
+
+            var todoItem = this.todoCollection[i];
+
+            var li = buildLiUI(todoItem.caption, todoItem.isCompleted, i);
+
+            ul.appendChild(li);
+
+
+          };
+
+        }
+
+
+      }
+
+      function buildLiUI(caption, isCompleted, index) {
+
+        var li = document.createElement('li');
+        var textNode = document.createTextNode(caption);
+
+        var deleteBtn = document.createElement('button');
+        deleteBtn.setAttribute('type', 'button');
+        deleteBtn.appendChild(document.createTextNode('Delete'));
+
+        deleteBtn.onclick = function(e) {
+
+          todoTest.removeTodo(index);
+          todoTest.render();
+
+        }
+
+        var checkBox = document.createElement('input');
+
+        checkBox.setAttribute('type', 'checkbox');
+
+        checkBox.onclick = function(e) {
+
+          todoTest.toggleTodo(index);
+          todoTest.render();
+
+        }
+        li.appendChild(checkBox);
+        li.appendChild(textNode);
+        li.appendChild(deleteBtn);
+
+        if(isCompleted) {
+          li.setAttribute('class', 'completed')
+          checkBox.setAttribute('checked', 'checked');
+        } else
+          li.setAttribute('class', '')
+        return li;
+
+      }
+      /**
+        Test case begins
+      **/
+
+      var todoTest = new TodoApp;
+      todoTest.addTodo('First');
+      todoTest.addTodo('Second');
+      todoTest.render();
+
+      setTimeout(function(){
+
+          todoTest.addTodo('Third');
+          todoTest.render();
+
+      }, 1000);
+      setTimeout(function(){
+
+          todoTest.toggleTodo(1);
+          todoTest.render();
+
+      }, 2000);
+
+      setTimeout(function(){
+
+          todoTest.removeTodo(1);
+          todoTest.render();
+
+      }, 3000);
+
+    </script>
+
+    <style>
+
+    .completed {
+      text-decoration: line-through;
+    }
+
+    </style>
+
+
+  </body>
+</html>
